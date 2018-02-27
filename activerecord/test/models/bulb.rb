@@ -52,3 +52,7 @@ class FailedBulb < Bulb
     throw(:abort)
   end
 end
+
+class BulbStrictlyOnCar < Bulb
+  validates :car_id, presence: true
+end

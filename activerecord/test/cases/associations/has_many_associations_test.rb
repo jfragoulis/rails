@@ -2517,12 +2517,13 @@ class HasManyAssociationsTest < ActiveRecord::TestCase
   end
 
   test "reattach to new objects replaces inverse association and foreign key" do
-    bulb = Bulb.create!(car: Car.create!)
+    bulb = BulbStrictlyOnCar.create!(car: Car.create!)
     assert bulb.car_id
     car = Car.new
     car.bulbs << bulb
     assert_equal car, bulb.car
     assert_nil bulb.car_id
+    assert_equal car.save, true
   end
 
   test "in memory replacement maintains order" do
