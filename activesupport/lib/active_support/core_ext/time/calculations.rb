@@ -341,4 +341,16 @@ class Time
   def next_year(years = 1)
     advance(years: years)
   end
+
+  # Returns the date of the last weekday of the month.
+  def last_weekday_of_month(weekday, end_of_month = DateTime.end_of_month)
+    weekday_number = DAYS_INTO_WEEK[weekday]
+
+    weekday_number = weekday_number % 7
+    weekday_number = 7 if weekday_number == 0
+
+    distance = (7 - weekday_number) - end_of_month.wday
+
+    end_of_month - distance.days
+  end
 end
